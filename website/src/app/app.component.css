@@ -1,0 +1,30 @@
+.container {
+    display: flex;
+    direction: column;
+    width: 100%;
+}
+
+.title, .account {
+    flex: 0 1 10%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.menu {
+    flex: 0 1 80%;
+    display: flex;
+    direction: column;
+}
+
+.menu > a {
+    margin-left: 10px;
+}
+
+a {
+    text-decoration: none;
+}
+
+.active {
+    color: rgba(47, 192, 202, 0.664);
+}

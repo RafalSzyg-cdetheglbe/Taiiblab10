@@ -1,0 +1,33 @@
+<button id="addBtn" mat-fab color="primary" *ngIf="isAdmin()" (click)="addNewProduct()">
+    <mat-icon>add</mat-icon>
+</button>
+<table mat-table [dataSource]="products">
+    <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef class="header-cell"> Name </th>
+        <td mat-cell *matCellDef="let product" class="content-cell"> {{product.name}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="description">
+        <th mat-header-cell *matHeaderCellDef class="header-cell"> Description </th>
+        <td mat-cell *matCellDef="let product" class="content-cell"> {{product.description}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="price">
+        <th mat-header-cell *matHeaderCellDef class="header-cell"> Price </th>
+        <td mat-cell *matCellDef="let product" class="content-cell"> {{product.price | currency:"USD"}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef class="header-cell"> Actions </th>
+        <td mat-cell *matCellDef="let product" class="content-cell">             
+            <button mat-flat-button color="warn" (click)="addProduct(product)">add</button>
+            <button mat-flat-button color="warn" *ngIf="isAdmin()" (click)="editProduct(product.id)">edit</button>
+            <button mat-flat-button color="warn" *ngIf="isAdmin()" (click)="deleteProduct(product.id)">delete</button>
+         </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="['name', 'description', 'price', 'actions']"></tr>
+    <tr mat-row *matRowDef="let myRowData; columns: ['name', 'description', 'price', 'actions']"></tr>
+</table>
+<mat-paginator [pageSizeOptions]="pageSizeOptions" [length]="length" [pageSize]="pageSize" (page)="update($event)">
+</mat-paginator>

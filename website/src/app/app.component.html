@@ -1,0 +1,16 @@
+<mat-toolbar *ngIf="isUserAuthenticated()">
+  <div class="container">
+    <div class="title">
+      <span>{{title}}</span>
+    </div>
+    <div class="menu">
+      <a routerLink="/products" routerLinkActive="active">products</a>
+      <a routerLink="/basket" routerLinkActive="active">basket</a>
+      <a *ngIf="isAdmin()" routerLink="/users" routerLinkActive="active">users</a>
+    </div>
+    <div class="account">
+      <a routerLink="/login" (click)="logout()">logout</a>
+    </div>
+  </div>
+</mat-toolbar>
+<router-outlet></router-outlet>

@@ -1,0 +1,32 @@
+<form #registerForm="ngForm" (ngSubmit)="signUp()">
+    <div>
+        <h2>Sign up</h2>
+    </div>
+    
+    <mat-error *ngIf="userAlreadyExists">
+        User already exists
+    </mat-error>
+
+    <mat-form-field appearance="fill">
+        <mat-label>Login</mat-label>
+        <input matInput type="text" name="login" id="login" [(ngModel)]="user.login" required>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+        <mat-label>Password</mat-label>
+        <input matInput type="password" name="password" id="password" [(ngModel)]="user.password" required>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+        <mat-label>Name</mat-label>
+        <input matInput type="text" name="name" id="name" [(ngModel)]="user.name" required>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+        <mat-label>Surname</mat-label>
+        <input matInput type="text" name="surname" id="surname" [(ngModel)]="user.surname" required>
+    </mat-form-field>
+
+    <button mat-flat-button color="warn" type="submit" [disabled]="!registerForm.valid">sign up</button>
+    <button mat-stroked-button color="warn" (click)="signIn()">sign in</button>
+</form>

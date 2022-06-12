@@ -1,0 +1,21 @@
+form {
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    width: 500px;
+    height: auto;
+    border: 2px solid #7e1515; 
+    border-radius: 1%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+form > div > h2 {
+    text-align: center;
+}
+
+form button {
+    margin-bottom: 15px;
+}

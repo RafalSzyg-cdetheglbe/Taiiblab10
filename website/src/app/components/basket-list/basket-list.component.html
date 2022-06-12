@@ -1,0 +1,60 @@
+<div>
+    <div>
+        <h3> Count: {{getCount()}} </h3>
+        <h3> Sum: {{getPrice() | currency:"USD"}} </h3>
+    </div>
+    <div *ngIf="!isEmpty()">
+        <button mat-flat-button color="primary" (click)="toggle()">{{btnStr}}</button>
+        <button mat-flat-button color="primary" (click)="clearBasket()">clear</button>
+    </div>
+    <div *ngIf="!hidden">
+        <table mat-table [dataSource]="basketItems">
+
+            <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef class="header-cell"> name </th>
+                <td mat-cell *matCellDef="let bi" class="content-cell"> {{bi.name}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="count">
+                <th mat-header-cell *matHeaderCellDef class="header-cell"> Count </th>
+                <td mat-cell *matCellDef="let bi" class="content-cell">
+                    <div class="count-container">
+                        <div class="count-first">
+                            <div *ngIf="bi.count > 1">
+                                <button mat-flat-button color="primary" (click)="changeCount(bi.id, bi.count - 1)">-</button>
+                            </div>
+                        </div>
+                        <div class="count-second">
+                            <div>
+                                {{bi.count}}
+                            </div>
+                        </div>
+                        <div class="count-third">
+                            <button mat-flat-button color="primary" (click)="changeCount(bi.id, bi.count + 1)">+</button>
+                        </div>
+                    </div> 
+                 </td>
+            </ng-container>
+
+            <ng-container matColumnDef="priceEach">
+                <th mat-header-cell *matHeaderCellDef class="header-cell"> Price / each </th>
+                <td mat-cell *matCellDef="let bi" class="content-cell"> {{bi.price | currency:"USD"}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="priceTotal">
+                <th mat-header-cell *matHeaderCellDef class="header-cell"> Total price </th>
+                <td mat-cell *matCellDef="let bi" class="content-cell"> {{bi.price * bi.count | currency:"USD"}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="actions">
+                <th mat-header-cell *matHeaderCellDef class="header-cell"> Actions </th>
+                <td mat-cell *matCellDef="let bi" class="content-cell">            
+                    <button mat-flat-button color="primary" (click)="deleteBasketItem(bi.id)">delete</button>
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="['name', 'count', 'priceEach', 'priceTotal', 'actions']"></tr>
+            <tr mat-row *matRowDef="let myRowData; columns: ['name', 'count', 'priceEach', 'priceTotal', 'actions']"></tr>
+        </table>
+    </div>
+</div>
